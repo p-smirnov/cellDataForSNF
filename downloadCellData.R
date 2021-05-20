@@ -72,7 +72,7 @@ gCSI.tissue.disease.map <- unique(gCSI.cell.info[,c("tissueid", 'Cellosaurus.Dis
 gCSI.tissue.disease.map <- gCSI.tissue.disease.map[order(gCSI.tissue.disease.map[[1]], gCSI.tissue.disease.map[[2]]),]
 
 
-gCSI.rna.data <- summarizeMolecularProfiles(gCSI, "rna")
+gCSI.rna.data <- summarizeMolecularProfiles(gCSI, "Kallisto_0.46.1.rnaseq")
 
 gCSI.rna.data <- t(SummarizedExperiment::assay(gCSI.rna.data))
 
