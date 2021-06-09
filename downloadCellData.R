@@ -4,6 +4,7 @@ options(timeout=600)
 
 outputDir <- "./output"
 
+common.drugs <- c("Bortezomib", "Entinostat", "Sirolimus","Docetaxel","Gemcitabine", "Crizotinib",  "Lapatinib","Vorinostat","Erlotinib","Paclitaxel","Pictilisib")
 if(!file.exists(outputDir)) dir.create(outputDir)
 
 GDSC2 <- downloadPSet("GDSC_2020(v2-8.2)", saveDir="./dwl/")
@@ -27,8 +28,8 @@ GDSC2.mut.data <- summarizeMolecularProfiles(GDSC2, "mutation_exome", summary.st
 
 GDSC2.mut.data <- t(SummarizedExperiment::assay(GDSC2.mut.data))
 
-GDSC2.aac.data <- t(summarizeSensitivityProfiles(GDSC2, "aac_recomputed"))
-GDSC2.ic50.data <- t(summarizeSensitivityProfiles(GDSC2, "ic50_recomputed"))
+GDSC2.aac.data <- t(summarizeSensitivityProfiles(GDSC2, "aac_recomputed", drugs=common.drugs))
+GDSC2.ic50.data <- t(summarizeSensitivityProfiles(GDSC2, "ic50_recomputed", drugs=common.drugs))
 
 
 
@@ -63,8 +64,8 @@ write.csv(GDSC2.ic50.data, file=file.path(outputDir, "GDSC2_ic50_data.csv"))
 
 # GDSC1.mut.data <- t(SummarizedExperiment::assay(GDSC1.mut.data))
 
-GDSC1.aac.data <- t(summarizeSensitivityProfiles(GDSC1, "aac_recomputed"))
-GDSC1.ic50.data <- t(summarizeSensitivityProfiles(GDSC1, "ic50_recomputed"))
+# GDSC1.aac.data <- t(summarizeSensitivityProfiles(GDSC1, "aac_recomputed"))
+# GDSC1.ic50.data <- t(summarizeSensitivityProfiles(GDSC1, "ic50_recomputed"))
 
 
 # write.csv(GDSC1.cell.info, file=file.path(outputDir, "GDSC1_cell_info.csv"))
@@ -72,8 +73,8 @@ GDSC1.ic50.data <- t(summarizeSensitivityProfiles(GDSC1, "ic50_recomputed"))
 # write.csv(GDSC1.rna.data, file=file.path(outputDir, "GDSC1_rna_data.csv"))
 # write.csv(GDSC1.cnv.data, file=file.path(outputDir, "GDSC1_cnv_data.csv"))
 # write.csv(GDSC1.mut.data, file=file.path(outputDir, "GDSC1_mut_data.csv"))
-write.csv(GDSC1.aac.data, file=file.path(outputDir, "GDSC1_aac_data.csv"))
-write.csv(GDSC1.ic50.data, file=file.path(outputDir, "GDSC1_ic50_data.csv"))
+# write.csv(GDSC1.aac.data, file=file.path(outputDir, "GDSC1_aac_data.csv"))
+# write.csv(GDSC1.ic50.data, file=file.path(outputDir, "GDSC1_ic50_data.csv"))
 
 
 CCLE <- downloadPSet("CCLE_2015", saveDir="./dwl/")
@@ -99,8 +100,8 @@ CCLE.mut.data <- summarizeMolecularProfiles(CCLE, "mutation", summary.stat="or")
 
 CCLE.mut.data <- t(SummarizedExperiment::assay(CCLE.mut.data))
 
-CTRPv2.aac.data <- t(summarizeSensitivityProfiles(CTRPv2, "aac_recomputed"))
-CTRPv2.ic50.data <- t(summarizeSensitivityProfiles(CTRPv2, "ic50_recomputed"))
+CTRPv2.aac.data <- t(summarizeSensitivityProfiles(CTRPv2, "aac_recomputed", drugs=common.drugs))
+CTRPv2.ic50.data <- t(summarizeSensitivityProfiles(CTRPv2, "ic50_recomputed", drugs=common.drugs))
 
 
 write.csv(CCLE.cell.info, file=file.path(outputDir, "CCLE_cell_info.csv"))
@@ -133,8 +134,8 @@ gCSI.mut.data <- summarizeMolecularProfiles(gCSI, "mutation", summary.stat="or")
 
 gCSI.mut.data <- t(SummarizedExperiment::assay(gCSI.mut.data))
 
-gCSI.aac.data <- t(summarizeSensitivityProfiles(gCSI, "aac_recomputed"))
-gCSI.ic50.data <- t(summarizeSensitivityProfiles(gCSI, "ic50_recomputed"))
+gCSI.aac.data <- t(summarizeSensitivityProfiles(gCSI, "aac_recomputed", drugs=common.drugs))
+gCSI.ic50.data <- t(summarizeSensitivityProfiles(gCSI, "ic50_recomputed", drugs=common.drugs))
 
 
 write.csv(gCSI.cell.info, file=file.path(outputDir, "gCSI_cell_info.csv"))
