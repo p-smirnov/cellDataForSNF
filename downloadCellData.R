@@ -28,6 +28,9 @@ GDSC2.mut.data <- summarizeMolecularProfiles(GDSC2, "mutation_exome", summary.st
 GDSC2.mut.data <- t(SummarizedExperiment::assay(GDSC2.mut.data))
 
 GDSC2.aac.data <- t(summarizeSensitivityProfiles(GDSC2, "aac_recomputed"))
+GDSC2.ic50.data <- t(summarizeSensitivityProfiles(GDSC2, "ic50_recomputed"))
+
+
 
 write.csv(GDSC2.cell.info, file=file.path(outputDir, "GDSC2_cell_info.csv"))
 write.csv(GDSC2.tissue.disease.map, file=file.path(outputDir, "GDSC2_tissue_table.csv"))
@@ -35,37 +38,42 @@ write.csv(GDSC2.rna.data, file=file.path(outputDir, "GDSC2_rna_data.csv"))
 write.csv(GDSC2.cnv.data, file=file.path(outputDir, "GDSC2_cnv_data.csv"))
 write.csv(GDSC2.mut.data, file=file.path(outputDir, "GDSC2_mut_data.csv"))
 write.csv(GDSC2.aac.data, file=file.path(outputDir, "GDSC2_aac_data.csv"))
+write.csv(GDSC2.ic50.data, file=file.path(outputDir, "GDSC2_ic50_data.csv"))
+
+## Molecular data should be identical
+
+# GDSC1 <- downloadPSet("GDSC_2020(v1-8.2)", saveDir="./dwl/")
+
+# GDSC1.cell.info <- cellInfo(GDSC1)[, c("cellid", "tissueid", "Cellosaurus.Disease.Type", "CellLine.Type")]
+# GDSC1.tissue.disease.map <- unique(GDSC1.cell.info[,c("tissueid", 'Cellosaurus.Disease.Type')])
+
+# GDSC1.tissue.disease.map <- GDSC1.tissue.disease.map[order(GDSC1.tissue.disease.map[[1]], GDSC1.tissue.disease.map[[2]]),]
 
 
-GDSC1 <- downloadPSet("GDSC_2020(v1-8.2)", saveDir="./dwl/")
+# GDSC1.rna.data <- summarizeMolecularProfiles(GDSC1, "Kallisto_0.46.1.rnaseq")
 
-GDSC1.cell.info <- cellInfo(GDSC1)[, c("cellid", "tissueid", "Cellosaurus.Disease.Type", "CellLine.Type")]
-GDSC1.tissue.disease.map <- unique(GDSC1.cell.info[,c("tissueid", 'Cellosaurus.Disease.Type')])
-
-GDSC1.tissue.disease.map <- GDSC1.tissue.disease.map[order(GDSC1.tissue.disease.map[[1]], GDSC1.tissue.disease.map[[2]]),]
+# GDSC1.rna.data <- t(SummarizedExperiment::assay(GDSC1.rna.data))
 
 
-GDSC1.rna.data <- summarizeMolecularProfiles(GDSC1, "Kallisto_0.46.1.rnaseq")
+# GDSC1.cnv.data <- summarizeMolecularProfiles(GDSC1, "cnv")
 
-GDSC1.rna.data <- t(SummarizedExperiment::assay(GDSC1.rna.data))
+# GDSC1.cnv.data <- t(SummarizedExperiment::assay(GDSC1.cnv.data))
 
+# GDSC1.mut.data <- summarizeMolecularProfiles(GDSC1, "mutation_exome", summary.stat="or")
 
-GDSC1.cnv.data <- summarizeMolecularProfiles(GDSC1, "cnv")
-
-GDSC1.cnv.data <- t(SummarizedExperiment::assay(GDSC1.cnv.data))
-
-GDSC1.mut.data <- summarizeMolecularProfiles(GDSC1, "mutation_exome", summary.stat="or")
-
-GDSC1.mut.data <- t(SummarizedExperiment::assay(GDSC1.mut.data))
+# GDSC1.mut.data <- t(SummarizedExperiment::assay(GDSC1.mut.data))
 
 GDSC1.aac.data <- t(summarizeSensitivityProfiles(GDSC1, "aac_recomputed"))
+GDSC1.ic50.data <- t(summarizeSensitivityProfiles(GDSC1, "ic50_recomputed"))
 
-write.csv(GDSC1.cell.info, file=file.path(outputDir, "GDSC1_cell_info.csv"))
-write.csv(GDSC1.tissue.disease.map, file=file.path(outputDir, "GDSC1_tissue_table.csv"))
-write.csv(GDSC1.rna.data, file=file.path(outputDir, "GDSC1_rna_data.csv"))
-write.csv(GDSC1.cnv.data, file=file.path(outputDir, "GDSC1_cnv_data.csv"))
-write.csv(GDSC1.mut.data, file=file.path(outputDir, "GDSC1_mut_data.csv"))
+
+# write.csv(GDSC1.cell.info, file=file.path(outputDir, "GDSC1_cell_info.csv"))
+# write.csv(GDSC1.tissue.disease.map, file=file.path(outputDir, "GDSC1_tissue_table.csv"))
+# write.csv(GDSC1.rna.data, file=file.path(outputDir, "GDSC1_rna_data.csv"))
+# write.csv(GDSC1.cnv.data, file=file.path(outputDir, "GDSC1_cnv_data.csv"))
+# write.csv(GDSC1.mut.data, file=file.path(outputDir, "GDSC1_mut_data.csv"))
 write.csv(GDSC1.aac.data, file=file.path(outputDir, "GDSC1_aac_data.csv"))
+write.csv(GDSC1.ic50.data, file=file.path(outputDir, "GDSC1_ic50_data.csv"))
 
 
 CCLE <- downloadPSet("CCLE_2015", saveDir="./dwl/")
@@ -92,6 +100,7 @@ CCLE.mut.data <- summarizeMolecularProfiles(CCLE, "mutation", summary.stat="or")
 CCLE.mut.data <- t(SummarizedExperiment::assay(CCLE.mut.data))
 
 CTRPv2.aac.data <- t(summarizeSensitivityProfiles(CTRPv2, "aac_recomputed"))
+CTRPv2.ic50.data <- t(summarizeSensitivityProfiles(CTRPv2, "ic50_recomputed"))
 
 
 write.csv(CCLE.cell.info, file=file.path(outputDir, "CCLE_cell_info.csv"))
@@ -100,6 +109,7 @@ write.csv(CCLE.rna.data, file=file.path(outputDir, "CCLE_rna_data.csv"))
 write.csv(CCLE.cnv.data, file=file.path(outputDir, "CCLE_cnv_data.csv"))
 write.csv(CCLE.mut.data, file=file.path(outputDir, "CCLE_mut_data.csv"))
 write.csv(CTRPv2.aac.data, file=file.path(outputDir, "CTRPv2_aac_data.csv"))
+write.csv(CTRPv2.ic50.data, file=file.path(outputDir, "CTRPv2_ic50_data.csv"))
 
 
 
@@ -124,6 +134,7 @@ gCSI.mut.data <- summarizeMolecularProfiles(gCSI, "mutation", summary.stat="or")
 gCSI.mut.data <- t(SummarizedExperiment::assay(gCSI.mut.data))
 
 gCSI.aac.data <- t(summarizeSensitivityProfiles(gCSI, "aac_recomputed"))
+gCSI.ic50.data <- t(summarizeSensitivityProfiles(gCSI, "ic50_recomputed"))
 
 
 write.csv(gCSI.cell.info, file=file.path(outputDir, "gCSI_cell_info.csv"))
@@ -132,5 +143,6 @@ write.csv(gCSI.rna.data, file=file.path(outputDir, "gCSI_rna_data.csv"))
 write.csv(gCSI.cnv.data, file=file.path(outputDir, "gCSI_cnv_data.csv"))
 write.csv(gCSI.mut.data, file=file.path(outputDir, "gCSI_mut_data.csv"))
 write.csv(gCSI.aac.data, file=file.path(outputDir, "gCSI_aac_data.csv"))
+write.csv(gCSI.ic50.data, file=file.path(outputDir, "gCSI_ic50_data.csv"))
 
 
